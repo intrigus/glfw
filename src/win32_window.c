@@ -545,6 +545,16 @@ static LRESULT CALLBACK windowProc(HWND hWnd, UINT uMsg,
 
                 break;
             }
+
+            case WM_NCCREATE:
+            {
+                // Windows 10: enable automatic non-client area scaling
+                if (EnableNonClientDpiScaling)
+                {
+                    EnableNonClientDpiScaling(hWnd);
+                }
+                break;
+            }
         }
 
         return DefWindowProcW(hWnd, uMsg, wParam, lParam);
@@ -1001,7 +1011,16 @@ static LRESULT CALLBACK windowProc(HWND hWnd, UINT uMsg,
             const float xscale = HIWORD(wParam) / 96.f;
             const float yscale = LOWORD(wParam) / 96.f;
             _glfwInputWindowContentScale(window, xscale, yscale);
-            break;
+
+            // Resize and reposition the window to match the new DPI
+            RECT* const suggestedRect = (RECT*)lParam;
+            SetWindowPos(hWnd, NULL,
+                         suggestedRect->left,
+                         suggestedRect->top,
+                         suggestedRect->right - suggestedRect->left,
+                         suggestedRect->bottom - suggestedRect->top,
+                         SWP_NOZORDER | SWP_NOACTIVATE);
+            return 0;
         }
 
         case WM_SETCURSOR:
