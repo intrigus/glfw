@@ -18,11 +18,11 @@ before_install:
 - chmod +x ~/bin/rpxc
 - export PATH=$PATH:$HOME/bin:$HOME/.local/bin
 - export RPXC_IMAGE=intrigus/docker-raspberry-pi-cross-compiler
+
+script:
 - echo "PKG_CONFIG_DIR=" >> .lwjgl_env_rpxc
 - echo "PKG_CONFIG_LIBDIR=${LWJGL_BUILD_SYSROOT}/usr/lib/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/share/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/lib/arm-linux-gnueabihf/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/share/arm-linux-gnueabihf/pkgconfig" >> .lwjgl_env_rpxc
 - echo "PKG_CONFIG_SYSROOT_DIR=${LWJGL_BUILD_SYSROOT}" >> .lwjgl_env_rpxc
-
-script:
 - mkdir build
 - cd build
 - rpxc --args "--env-file .lwjgl_env_rpxc" bash -c 'CC="arm-linux-gnueabihf-gcc" cmake -DBUILD_SHARED_LIBS=ON -DGLFW_BUILD_EXAMPLES=OFF -DGLFW_BUILD_TESTS=OFF -DGLFW_BUILD_DOCS=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="-U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0" ..'
