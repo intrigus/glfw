@@ -30,7 +30,7 @@ script:
 - echo 'cd src' >> tempScript.sh
 - echo 'arm-linux-gnueabihf-strip libglfw.so' >> tempScript.sh
 - chmod +x tempScript.sh
-- rpxc --args "--env-file ../.lwjgl_env_rpxc" bash -c './tempScript.sh' 
+- rpxc --args "--env-file .lwjgl_env_rpxc" bash -c './tempScript.sh' 
 #- "aws s3 cp libglfw.so s3://build.lwjgl.org/nightly/linux/x64/ --acl public-read --storage-class REDUCED_REDUNDANCY --cache-control \"public, must-revalidate, proxy-revalidate, max-age=0\""
 #- "git log --pretty=format:%H HEAD~2..HEAD~1 | head -n 1 > revision.git"
 #- "aws s3 cp revision.git s3://build.lwjgl.org/nightly/linux/x64/libglfw.so.git --acl public-read --storage-class REDUCED_REDUNDANCY --cache-control \"public, must-revalidate, proxy-revalidate, max-age=0\""
