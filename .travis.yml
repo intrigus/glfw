@@ -21,12 +21,11 @@ before_install:
 
 script:
 - echo "PKG_CONFIG_DIR=" >> .lwjgl_env_rpxc
-#:${LWJGL_BUILD_SYSROOT}/usr/lib/arm-linux-gnueabihf/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/share/arm-linux-gnueabihf/pkgconfig
-- echo "PKG_CONFIG_LIBDIR=${LWJGL_BUILD_SYSROOT}/usr/lib/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/share/pkgconfig" >> .lwjgl_env_rpxc
+- echo "PKG_CONFIG_LIBDIR=${LWJGL_BUILD_SYSROOT}/usr/lib/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/share/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/lib/arm-linux-gnueabihf/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/share/arm-linux-gnueabihf/pkgconfig" >> .lwjgl_env_rpxc
 - echo "PKG_CONFIG_SYSROOT_DIR=${LWJGL_BUILD_SYSROOT}" >> .lwjgl_env_rpxc
 - mkdir build
 - echo 'cd build' >> tempScript.sh
-- echo 'CC="arm-linux-gnueabihf-gcc" cmake -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER -DCMAKE_FIND_ROOT_PATH=${SYSROOT} -DBUILD_SHARED_LIBS=ON -DGLFW_BUILD_EXAMPLES=OFF -DGLFW_BUILD_TESTS=OFF -DGLFW_BUILD_DOCS=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="-U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0" ..' >> tempScript.sh
+- echo 'CC="arm-linux-gnueabihf-gcc" cmake -DCMAKE_LIBRARY_PATH=${SYSROOT} -DBUILD_SHARED_LIBS=ON -DGLFW_BUILD_EXAMPLES=OFF -DGLFW_BUILD_TESTS=OFF -DGLFW_BUILD_DOCS=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="-U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0" ..' >> tempScript.sh
 - echo 'cmake --build .' >> tempScript.sh
 - echo 'cd src' >> tempScript.sh
 - echo 'arm-linux-gnueabihf-strip libglfw.so' >> tempScript.sh
