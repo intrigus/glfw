@@ -25,7 +25,7 @@ script:
 - echo "PKG_CONFIG_SYSROOT_DIR=${LWJGL_BUILD_SYSROOT}" >> .lwjgl_env_rpxc
 - mkdir build
 - echo 'cd build' >> tempScript.sh
-- echo 'CC="arm-linux-gnueabihf-gcc" cmake --trace --debug-output -DX11_LIB_SEARCH_PATH=${SYSROOT} -DX11_INC_SEARCH_PATH=${SYSROOT} -DBUILD_SHARED_LIBS=ON -DGLFW_BUILD_EXAMPLES=OFF -DGLFW_BUILD_TESTS=OFF -DGLFW_BUILD_DOCS=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="-U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0" ..' >> tempScript.sh
+- echo 'CC="arm-linux-gnueabihf-gcc" cmake --trace --debug-output -DCMAKE_SYSROOT=${SYSROOT} -DBUILD_SHARED_LIBS=ON -DGLFW_BUILD_EXAMPLES=OFF -DGLFW_BUILD_TESTS=OFF -DGLFW_BUILD_DOCS=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="-U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0" ..' >> tempScript.sh
 - echo 'cmake --build .' >> tempScript.sh
 - echo 'cd src' >> tempScript.sh
 - echo 'arm-linux-gnueabihf-strip libglfw.so' >> tempScript.sh
