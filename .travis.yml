@@ -21,7 +21,8 @@ before_install:
 
 script:
 - echo "PKG_CONFIG_DIR=" >> .lwjgl_env_rpxc
-- echo "PKG_CONFIG_LIBDIR=${LWJGL_BUILD_SYSROOT}/usr/lib/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/share/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/lib/arm-linux-gnueabihf/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/share/arm-linux-gnueabihf/pkgconfig" >> .lwjgl_env_rpxc
+#:${LWJGL_BUILD_SYSROOT}/usr/lib/arm-linux-gnueabihf/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/share/arm-linux-gnueabihf/pkgconfig
+- echo "PKG_CONFIG_LIBDIR=${LWJGL_BUILD_SYSROOT}/usr/lib/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/share/pkgconfig" >> .lwjgl_env_rpxc
 - echo "PKG_CONFIG_SYSROOT_DIR=${LWJGL_BUILD_SYSROOT}" >> .lwjgl_env_rpxc
 - mkdir build
 - echo 'cd build' >> tempScript.sh
